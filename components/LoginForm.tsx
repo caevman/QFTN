@@ -1,6 +1,7 @@
 // components/LoginForm.tsx
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 const LoginForm = () => {
   const [username, setUsername] = useState<string>('');
@@ -13,6 +14,13 @@ const LoginForm = () => {
     console.log('Username:', username);
     console.log('Password:', password);
 
+    let data={content : {Username : username, Password : password} }
+    axios.post('api/createuser', data)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((e) => { console.log(e)})
+    
     router.push('/feed')
   };
 
